@@ -295,7 +295,7 @@
       packageDefinitions = {
         # the name here is the name of the package
         # and also the default command name for it.
-        nixCats =
+        nvim =
           { pkgs, name, ... }@misc:
           {
             # these also recieve our pkgs variable
@@ -310,7 +310,6 @@
               # That would result in a failed build, as nixos and home manager modules validate for collisions on your path
               aliases = [
                 "vim"
-                "vimcat"
               ];
 
               # explained below in the `regularCats` package's definition
@@ -344,7 +343,7 @@
           };
       };
 
-      defaultPackageName = "nixCats";
+      defaultPackageName = "nvim";
       # I did not here, but you might want to create a package named nvim.
 
     in
