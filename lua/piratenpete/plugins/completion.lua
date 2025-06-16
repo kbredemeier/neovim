@@ -1,6 +1,6 @@
 local load_w_after = function(name)
   vim.cmd.packadd(name)
-  vim.cmd.packadd(name .. '/after')
+  vim.cmd.packadd(name .. "/after")
 end
 
 return {
@@ -17,11 +17,11 @@ return {
     "luasnip",
     dep_of = { "blink.cmp" },
     after = function(_)
-      local luasnip = require 'luasnip'
-      require('luasnip.loaders.from_vscode').lazy_load()
-      luasnip.config.setup {}
+      local luasnip = require("luasnip")
+      require("luasnip.loaders.from_vscode").lazy_load()
+      luasnip.config.setup({})
 
-      local ls = require('luasnip')
+      local ls = require("luasnip")
 
       vim.keymap.set({ "i", "s" }, "<M-n>", function()
         if ls.choice_active() then
@@ -42,7 +42,7 @@ return {
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
         -- See :h blink-cmp-config-keymap for configuring keymaps
         keymap = {
-          preset = 'default',
+          preset = "default",
         },
         cmdline = {
           enabled = true,
@@ -54,18 +54,22 @@ return {
           sources = function()
             local type = vim.fn.getcmdtype()
             -- Search forward and backward
-            if type == '/' or type == '?' then return { 'buffer' } end
+            if type == "/" or type == "?" then
+              return { "buffer" }
+            end
             -- Commands
-            if type == ':' or type == '@' then return { 'cmdline', 'cmp_cmdline' } end
+            if type == ":" or type == "@" then
+              return { "cmdline", "cmp_cmdline" }
+            end
             return {}
           end,
         },
         fuzzy = {
           sorts = {
-            'exact',
+            "exact",
             -- defaults
-            'score',
-            'sort_text',
+            "score",
+            "sort_text",
           },
         },
         signature = {
@@ -77,7 +81,7 @@ return {
         completion = {
           menu = {
             draw = {
-              treesitter = { 'lsp' },
+              treesitter = { "lsp" },
               components = {
                 label = {
                   text = function(ctx)
@@ -95,10 +99,10 @@ return {
           },
         },
         snippets = {
-          preset = 'luasnip',
+          preset = "luasnip",
         },
         sources = {
-          default = { 'lsp', 'path', 'snippets', 'buffer', 'omni' },
+          default = { "lsp", "path", "snippets", "buffer", "omni" },
           providers = {
             path = {
               score_offset = 50,
@@ -110,11 +114,11 @@ return {
               score_offset = 40,
             },
             cmp_cmdline = {
-              name = 'cmp_cmdline',
-              module = 'blink.compat.source',
+              name = "cmp_cmdline",
+              module = "blink.compat.source",
               score_offset = -100,
               opts = {
-                cmp_name = 'cmdline',
+                cmp_name = "cmdline",
               },
             },
           },

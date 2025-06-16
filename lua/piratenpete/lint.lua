@@ -1,18 +1,18 @@
-require('lze').load {
+require("lze").load({
   {
     "nvim-lint",
-    for_cat = 'lint',
+    for_cat = "lint",
     -- cmd = { "" },
     event = "FileType",
     -- ft = "",
     -- keys = "",
     -- colorscheme = "",
     after = function(plugin)
-      require('lint').linters_by_ft = {
+      require("lint").linters_by_ft = {
         -- NOTE: download some linters in lspsAndRuntimeDeps
         -- and configure them here
-        markdown = { 'vale', },
-        sh = { 'shellcheck' },
+        markdown = { "vale" },
+        sh = { "shellcheck" },
         -- javascript = { 'eslint' },
         -- typescript = { 'eslint' },
       }
@@ -24,4 +24,4 @@ require('lze').load {
       })
     end,
   },
-}
+})

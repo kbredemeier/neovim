@@ -19,5 +19,5 @@ require("piratenpete.lint")
 require("piratenpete.format")
 
 if nixCats("debug") then
-	require("piratenpete.debug")
+  require("piratenpete.debug")
 end
