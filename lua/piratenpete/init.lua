@@ -14,7 +14,7 @@ require("lze").register_handlers(require("lzextras").lsp)
 -- demonstrated in ./LSPs/init.lua
 
 require("piratenpete.plugins")
-require("piratenpete.LSPs")
+require("piratenpete.lsp")
 require("piratenpete.lint")
 require("piratenpete.format")
 
