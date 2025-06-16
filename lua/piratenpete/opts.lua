@@ -2,6 +2,9 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
+-- Set to true if you have a Nerd Font installed and selected in the terminal
+vim.g.have_nerd_font = true
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -22,16 +25,35 @@ vim.opt.inccommand = "split"
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Show which line your cursor is on
+vim.o.cursorline = true
+
 -- Make line numbers default
 vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = "a"
 
+-- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
+-- instead raise a dialog asking if you wish to save the current file(s)
+-- See `:help 'confirm'`
+vim.o.confirm = true
+
+-- Sync clipboard between OS and Neovim.
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+-- vim.schedule(function()
+--   vim.o.clipboard = 'unnamedplus'
+-- end)
+
+-- Enable break indent
+vim.o.breakindent = true
+
 -- Indent
 -- vim.o.smarttab = true
-vim.opt.cpoptions:append("I")
-vim.o.expandtab = true
+-- vim.opt.cpoptions:append("I")
+-- vim.o.expandtab = true
 -- vim.o.smartindent = true
 -- vim.o.autoindent = true
 -- vim.o.tabstop = 4
