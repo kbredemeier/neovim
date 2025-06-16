@@ -116,6 +116,7 @@
               nixd
               stylua
               nixfmt-rfc-style
+	      tailwindcss-language-server
             ];
           };
 
@@ -182,7 +183,16 @@
                 markdown-preview-nvim
                 conform-nvim
                 nvim-lint
-		elixir-tools-nvim
+                elixir-tools-nvim
+                fidget-nvim
+                actions-preview-nvim
+                trouble-nvim
+                lsp_signature-nvim
+                # lsp-status-nvim
+                nvim-autopairs
+                guess-indent-nvim
+                todo-comments-nvim
+                vim-test
               ];
               extra = with pkgs.vimPlugins; [
                 fidget-nvim
