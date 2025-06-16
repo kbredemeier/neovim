@@ -26,6 +26,7 @@ require("lze").load({
           css = { "prettierd" },
           json = { "prettierd" },
           yaml = { "prettierd" },
+          ["_"] = { "trim_whitespace" },
         },
       })
 
