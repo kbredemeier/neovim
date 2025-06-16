@@ -182,6 +182,7 @@
                 markdown-preview-nvim
                 conform-nvim
                 nvim-lint
+		elixir-tools-nvim
               ];
               extra = with pkgs.vimPlugins; [
                 fidget-nvim

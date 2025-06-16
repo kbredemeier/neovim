@@ -51,20 +51,20 @@ require("lze").load({
       })
     end,
   },
-  {
-    "elixir",
-    ft = "elixir",
-    lsp = {
-      cmd = { "elixir-ls" },
-      filetypes = { "elixir" },
-      settings = {
-        dialyzerEnabled = true,
-        fetchDeps = false,
-        enableTestLenses = true,
-        suggestSpecs = true,
-      },
-    },
-  },
+  -- {
+  --   "elixir",
+  --   ft = "elixir",
+  --   lsp = {
+  --     cmd = { "elixir-ls" },
+  --     filetypes = { "elixir" },
+  --     settings = {
+  --       dialyzerEnabled = true,
+  --       fetchDeps = false,
+  --       enableTestLenses = true,
+  --       suggestSpecs = true,
+  --     },
+  --   },
+  -- },
   {
     -- name of the lsp
     "lua_ls",
