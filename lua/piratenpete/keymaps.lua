@@ -96,3 +96,39 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+vim.keymap.set("n", "<leader>.", "'.", { desc = "Go to last edit location" })
+vim.keymap.set("n", "0", "^", { desc = "Go to first character in line" })
+vim.keymap.set("n", "^", "0", { desc = "Go to beginning of line" })
+vim.keymap.set("n", "vv", "<C-w>v", { desc = "Open vertical split" })
+vim.keymap.set("n", "ss", "<C-w>s", { desc = "Open horizontal split" })
+
+-- Normally these are not good mappings, but I have left/right on my thumb
+-- cluster, so navigating tabs is quite easy this way.
+vim.keymap.set("n", "<left>", "gT")
+vim.keymap.set("n", "<right>", "gt")
+
+-- These mappings control the size of splits (height/width)
+vim.keymap.set("n", "<M-Right>", "<c-w>5<", { desc = "Expand Split Right" })
+vim.keymap.set("n", "<M-Left>", "<c-w>5>", { desc = "Expand Split Left" })
+vim.keymap.set("n", "<M-Up>", "<C-W>+", { desc = "Expand Split Up" })
+vim.keymap.set("n", "<M-Down>", "<C-W>-", { desc = "Expand Split Down" })
+
+local window_killer = function()
+  local current_buffer = vim.api.nvim_get_current_buf()
+  local windows_with_buffer = 0
+
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_get_buf(win) == current_buffer then
+      windows_with_buffer = windows_with_buffer + 1
+    end
+  end
+
+  if windows_with_buffer > 1 then
+    vim.cmd("wincmd c")
+  else
+    vim.cmd("bdelete")
+  end
+end
+
+vim.keymap.set("n", "Q", window_killer, { noremap = true, silent = true }, { desc = "Kills the current buffer" })
