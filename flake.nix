@@ -373,6 +373,7 @@
         devShells = {
           default = pkgs.mkShell {
             name = defaultPackageName;
+            buildInputs = with pkgs; [ stylua ];
             packages = [ defaultPackage ];
             inputsFrom = [ ];
             shellHook = "";
