@@ -203,6 +203,13 @@
                 undotree
                 indent-blankline-nvim
                 vim-startuptime
+		avante-nvim
+		copilot-lua
+		nui-nvim
+		mini-pick
+		dressing-nvim
+		snacks-nvim
+
                 # If it was included in your flake inputs as plugins-hlargs,
                 # this would be how to add that plugin in your config.
                 # pkgs.neovimPlugins.hlargs
