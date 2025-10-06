@@ -131,4 +131,8 @@ local window_killer = function()
   end
 end
 
-vim.keymap.set("n", "Q", window_killer, { noremap = true, silent = true }, { desc = "Kills the current buffer" })
+vim.keymap.set("n", "Q", window_killer, { noremap = true, silent = true, desc = "Kills the current buffer" })
+
+vim.cmd [[iabbrev :shrug: ¯\_(ツ)_/¯]]
+-- Open files in current file's location
+vim.cmd [[cabbr <expr> %% expand('%:p:h')]]

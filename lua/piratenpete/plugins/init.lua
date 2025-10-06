@@ -19,6 +19,7 @@ if ok then
 end
 
 vim.g.loaded_netrwPlugin = 1
+
 require("oil").setup({
   default_file_explorer = true,
   view_options = {
@@ -56,6 +57,7 @@ require("lze").load({
   { import = "piratenpete.plugins.telescope" },
   { import = "piratenpete.plugins.treesitter" },
   { import = "piratenpete.plugins.completion" },
+  { import = "piratenpete.plugins.elixir" },
   {
     "markdown-preview.nvim",
     -- NOTE: for_cat is a custom handler that just sets enabled value for us,
@@ -109,6 +111,57 @@ require("lze").load({
     end,
   },
   {
+    "hop.nvim",
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      local hop = require("hop")
+      local directions = require("hop.hint").HintDirection
+
+      hop.setup({
+        keys = "etovxqpdygfblzhckisuran",
+      })
+
+      vim.keymap.set("n", "<leader><leader>w", function()
+        hop.hint_words({ direction = directions.AFTER_CURSOR })
+      end, { desc = "Move to word after cursor" })
+
+      vim.keymap.set("n", "<leader><leader>W", function()
+        hop.hint_words({ direction = directions.BEFORE_CURSOR })
+      end, { desc = "Move to word before cursor" })
+    end,
+  },
+  -- {
+  --   "nvim-spider",
+  --   event = "DeferredUIEnter",
+  --   after = function(plugin)
+  --     local spider = require("spider")
+  --
+  --     spider.setup({})
+  --
+  --     vim.keymap.set({ "n", "o", "x" }, "<C-w>", function()
+  --       spider.motion("w")
+  --     end, {})
+  --
+  --     vim.keymap.set({ "n", "o", "x" }, "<C-e>", function()
+  --       spider.motion("e")
+  --     end, {})
+  --
+  --     vim.keymap.set({ "n", "o", "x" }, "<C-b>", function()
+  --       spider.motion("b")
+  --     end, {})
+  --   end,
+  -- },
+  {
+    "vim-test",
+    event = "DeferredUIEnter",
+    after = function(_)
+      vim.g["test#strategy"] = "neovim"
+      vim.keymap.set("n", "<leader>tn", "<cmd>TestNearest<CR>", { desc = "[T]est [N]earest" })
+      vim.keymap.set("n", "<leader>tf", "<cmd>TestFile<CR>", { desc = "[T]est [F]ile" })
+      vim.keymap.set("n", "<leader>tl", "<cmd>TestLast<CR>", { desc = "[T]est [L]ast" })
+    end,
+  },
+  {
     "indent-blankline.nvim",
     event = "DeferredUIEnter",
     after = function(plugin)
@@ -116,11 +169,74 @@ require("lze").load({
     end,
   },
   {
+    "guess-indent.nvim",
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require("guess-indent").setup({})
+    end,
+  },
+  {
+    "nvim-autopairs",
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require("nvim-autopairs").setup({})
+    end,
+  },
+  {
     "nvim-surround",
     event = "DeferredUIEnter",
     -- keys = "",
     after = function(plugin)
-      require("nvim-surround").setup()
+      require("nvim-surround").setup({})
+    end,
+  },
+  {
+    "todo-comments.nvim",
+    event = "DeferredUIEnter",
+    -- keys = "",
+    after = function(plugin)
+      require("todo-comments").setup({})
+    end,
+  },
+  {
+    "trouble.nvim",
+    -- event = "DeferredUIEnter",
+    -- cmd = "Trouble",
+    -- keys = "",
+    keys = {
+      {
+        "<leader>td",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "[T]toggle [D]iagnostics",
+      },
+      {
+        "<leader>tbd",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "[T]oggle [B]uffer [D]iagnostics",
+      },
+      {
+        "<leader>ts",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "[T]oggle [S]ymbols",
+      },
+    },
+    after = function(plugin)
+      require("trouble").setup({})
+      for i, entry in ipairs(plugin.keys) do
+        local args = {}
+        for j = 1, #entry do
+          args[j] = entry[j]
+        end
+
+        local options = {}
+        for k, v in pairs(entry) do
+          if type(k) ~= "number" then
+            options[k] = v
+          end
+        end
+
+        vim.keymap.set("n", args[1], args[2], options)
+      end
     end,
   },
   {
@@ -137,7 +253,31 @@ require("lze").load({
     event = "DeferredUIEnter",
     -- keys = "",
     after = function(plugin)
-      require("fidget").setup({})
+      require("fidget").setup({
+        progress = {
+          poll_rate = 10,
+        },
+      })
+    end,
+  },
+  {
+    "actions-preview.nvim",
+    event = "DeferredUIEnter",
+    dep_of = { "nvim-lspconfig" },
+    -- keys = "",
+    after = function(plugin)
+      require("actions-preview").setup({})
+      vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
+    end,
+  },
+  {
+    "lsp_signature.nvim",
+    event = "InsertEnter",
+    -- on_require = { "lsp_signature" },
+    dep_of = { "nvim-lspconfig" },
+    -- keys = "",
+    after = function(plugin)
+      require("lsp_signature").setup({ bind = true })
     end,
   },
   -- {

@@ -1,12 +1,16 @@
 return {
   {
     "elixir-tools.nvim",
-    event = { "BuffReadPre", "BufNewFile" },
+    -- event = { "BuffReadPre", "BufNewFile" },
+    ft = { "elixir" },
     after = function(_)
       local elixir = require("elixir")
       local elixirls = require("elixir.elixirls")
       elixir.setup({
         on_attach = function()
+          -- local on_attach = require("piratenpete.lsp.on_attach")
+          -- on_attach()
+
           vim.keymap.set(
             "n",
             "<space>fp",
@@ -34,7 +38,9 @@ return {
         projectionist = { enable = true },
         elixirls = {
           enable = true,
-          path = { "elixir-ls" },
+          on_attach = require("piratenpete.lsp.on_attach"),
+          -- path = { "elixir-ls" },
+          cmd = "elixir-ls",
           settings = elixirls.settings({
             dialyzerEnabled = true,
             fetchDeps = false,

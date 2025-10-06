@@ -16,6 +16,7 @@ return {
   {
     "luasnip",
     dep_of = { "blink.cmp" },
+    on_require = { "luasnip" },
     after = function(_)
       local luasnip = require("luasnip")
       require("luasnip.loaders.from_vscode").lazy_load()
@@ -37,6 +38,7 @@ return {
   {
     "blink.cmp",
     event = "DeferredUIEnter",
+    on_require = { "blink.cmp" },
     after = function(_)
       require("blink.cmp").setup({
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
@@ -73,7 +75,7 @@ return {
           },
         },
         signature = {
-          enabled = true,
+          enabled = false,
           window = {
             show_documentation = true,
           },

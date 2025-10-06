@@ -29,10 +29,15 @@ require("lze").load({
     -- and it will run for all specs with type(plugin.lsp) == table
     -- when their filetype trigger loads them
     lsp = function(plugin)
+      local blink_capabilities = require("blink.cmp").get_lsp_capabilities()
+      local plugin_capabilities = plugin.lsp.capabilities or {}
+
+      plugin.capabilities = vim.tbl_deep_extend("force", {}, blink_capabilities, plugin_capabilities)
+
       vim.lsp.config(plugin.name, plugin.lsp or {})
       vim.lsp.enable(plugin.name)
     end,
-    before = function(_)
+    before = function(arg)
       vim.lsp.config("*", {
         on_attach = require("piratenpete.lsp.on_attach"),
       })
@@ -51,12 +56,17 @@ require("lze").load({
       })
     end,
   },
+  {
+    "elixir_ls",
+    ft = { "elixir", "eelixir", "heex" },
+    lsp = {},
+  },
   -- {
-  --   "elixir",
-  --   ft = "elixir",
+  --   "elixir_ls",
+  --   ft = { "elixir", "eelixir", "heex" },
   --   lsp = {
   --     cmd = { "elixir-ls" },
-  --     filetypes = { "elixir" },
+  --     -- filetypes = { "elixir", "eelixir", "heex", "surface" },
   --     settings = {
   --       dialyzerEnabled = true,
   --       fetchDeps = false,
