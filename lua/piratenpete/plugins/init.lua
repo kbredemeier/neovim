@@ -58,40 +58,45 @@ require("lze").load({
   { import = "piratenpete.plugins.treesitter" },
   { import = "piratenpete.plugins.completion" },
   { import = "piratenpete.plugins.elixir" },
+  { import = "piratenpete.plugins.llm" },
   {
-    "markdown-preview.nvim",
-    -- NOTE: for_cat is a custom handler that just sets enabled value for us,
-    -- based on result of nixCats('cat.name') and allows us to set a different default if we wish
-    -- it is defined in luaUtils template in lua/nixCatsUtils/lzUtils.lua
-    -- you could replace this with enabled = nixCats('cat.name') == true
-    -- if you didnt care to set a different default for when not using nix than the default you already set
-    cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
-    ft = "markdown",
-    keys = {
-      {
-        "<leader>mp",
-        "<cmd>MarkdownPreview <CR>",
-        mode = { "n" },
-        noremap = true,
-        desc = "markdown preview",
-      },
-      {
-        "<leader>ms",
-        "<cmd>MarkdownPreviewStop <CR>",
-        mode = { "n" },
-        noremap = true,
-        desc = "markdown preview stop",
-      },
-      {
-        "<leader>mt",
-        "<cmd>MarkdownPreviewToggle <CR>",
-        mode = { "n" },
-        noremap = true,
-        desc = "markdown preview toggle",
-      },
-    },
-    before = function(plugin)
-      vim.g.mkdp_auto_close = 0
+    "nui.nvim",
+    event = "DeferredUIEnter",
+    after = function(plugin)
+    end,
+  },
+  {
+    "mini.pick",
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require("mini.pick").setup()
+    end,
+  },
+  {
+    "snacks.nvim",
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require("snacks").setup({
+        input = { enabled = true },
+      })
+    end,
+  },
+  -- Copilot is only required to setup authentication and get the API token
+  -- {
+  --   "copilot.lua",
+  --   event = "DeferredUIEnter",
+  --   after = function(plugin)
+  --     require("copilot").setup({})
+  --   end,
+  -- },
+  {
+    "render-markdown.nvim",
+    on_require = { "nvim-treesitter" },
+    ft = {"markdown", "Avante" },
+    after = function(plugin)
+      require("render-markdown.nvim").setup({
+        file_types = {"markdown", "Avante" },
+      })
     end,
   },
   {
