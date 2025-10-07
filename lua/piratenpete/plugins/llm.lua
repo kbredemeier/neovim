@@ -1,16 +1,7 @@
 return {
   "avante.nvim",
-  event = "DeferredUIEnter",
-  -- dep_of = { "nui.nvim" },
-  -- on_plugin = { "nui.nvim" },
-  -- on_require = { "nui.nvim" },
-  -- before = function()
-	 --  require("lze").load("nui.nvim")
-	 --  require("lze").load("render-markdown.nvim")
-  -- end,
+  on_plugin = { "nui.nvim" },
   after = function(plugin)
-	  -- require("nui.split")
-	  -- require("render-markdown")
     require("avante").setup({
       instructions_file = "avante.md",
       -- for example
