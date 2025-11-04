@@ -177,7 +177,7 @@
                 vim-sleuth
                 vim-fugitive
                 vim-rhubarb
-                nvim-surround
+                mini-surround
                 lazydev-nvim
                 markdown-preview-nvim
                 conform-nvim

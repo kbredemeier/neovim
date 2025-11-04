@@ -192,11 +192,11 @@ require("lze").load({
     end,
   },
   {
-    "nvim-surround",
+    "mini-surround",
     event = "DeferredUIEnter",
     -- keys = "",
     after = function(plugin)
-      require("nvim-surround").setup({})
+      require("mini.surround").setup({})
     end,
   },
   {
